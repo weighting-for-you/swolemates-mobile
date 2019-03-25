@@ -24,6 +24,10 @@ export default class EditPage extends React.Component {
       activities: "",
       gym: "",
       hours: "",
+<<<<<<< HEAD
+=======
+      image: "https://s3-us-west-1.amazonaws.com/abibasnavbar/Coco+cute.jpg",
+>>>>>>> refs/remotes/origin/upload-pics
       location: "",
       first: "",
       last: "",
@@ -111,7 +115,13 @@ export default class EditPage extends React.Component {
     });
     const name = uri.split("/").pop();
     const imageRef = storageRef.child(`userImages/` + `${name}`);
+<<<<<<< HEAD
     await imageRef.put(blob).then(() => console.log("blob sent!"));
+=======
+    const snapshot = await imageRef
+      .put(blob)
+      .then(() => console.log("blob sent!"));
+>>>>>>> refs/remotes/origin/upload-pics
 
     blob.close();
 
@@ -120,7 +130,13 @@ export default class EditPage extends React.Component {
 
   handleImagePicked = async pickerResult => {
     let uploadUrl = await this.uploadImageAsync(pickerResult.uri);
+<<<<<<< HEAD
     this.setState({ image: uploadUrl });
+=======
+    this.setState({ image: uploadUrl }, () => {
+      console.log(this.state.image);
+    });
+>>>>>>> refs/remotes/origin/upload-pics
   };
 
   splitArr() {
@@ -137,10 +153,14 @@ export default class EditPage extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     const image =
       this.state.image === "" || !this.state.image
         ? this.state.defaultImage
         : this.state.image;
+=======
+    const { image } = this.state;
+>>>>>>> refs/remotes/origin/upload-pics
     return (
       <ScrollView>
         <View style={styles.parentimg}>

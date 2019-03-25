@@ -21,12 +21,19 @@ class DisplayProfile extends React.Component {
       activities: ["biking", "swimming", "`fun stuff"],
       gym: "25 Hr fitness",
       hours: "3am",
+<<<<<<< HEAD
       location: "fine",
       first: "",
       last: "",
       image: "",
       defaultImage:
         "https://s3-us-west-1.amazonaws.com/abibasnavbar/Screen+Shot+2019-03-24+at+8.59.25+PM.png"
+=======
+      image: "url",
+      location: "fine",
+      first: "",
+      last: ""
+>>>>>>> refs/remotes/origin/upload-pics
     };
     this.getProfile = this.getProfile.bind(this);
   }
@@ -86,7 +93,11 @@ class DisplayProfile extends React.Component {
               rounded
               size="xlarge"
               source={{
+<<<<<<< HEAD
                 uri: image //this will be this.state.url
+=======
+                uri: this.state.image //this will be this.state.url
+>>>>>>> refs/remotes/origin/upload-pics
               }}
             />
             <Text style={styles.name}>
