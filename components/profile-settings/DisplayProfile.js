@@ -21,10 +21,12 @@ class DisplayProfile extends React.Component {
       activities: ["biking", "swimming", "`fun stuff"],
       gym: "25 Hr fitness",
       hours: "3am",
-      image: "url",
       location: "fine",
       first: "",
-      last: ""
+      last: "",
+      image: "",
+      defaultImage:
+        "https://s3-us-west-1.amazonaws.com/abibasnavbar/Screen+Shot+2019-03-24+at+8.59.25+PM.png"
     };
     this.getProfile = this.getProfile.bind(this);
   }
@@ -73,6 +75,7 @@ class DisplayProfile extends React.Component {
   }
 
   render() {
+    const image = this.state.image ? this.state.image : this.state.defaultImage;
     if (this.state.change) {
       return <EditPage />;
     } else {
@@ -83,7 +86,7 @@ class DisplayProfile extends React.Component {
               rounded
               size="xlarge"
               source={{
-                uri: this.state.image //this will be this.state.url
+                uri: image //this will be this.state.url
               }}
             />
             <Text style={styles.name}>

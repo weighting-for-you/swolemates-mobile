@@ -24,10 +24,12 @@ export default class EditPage extends React.Component {
       activities: "",
       gym: "",
       hours: "",
-      image: "https://s3-us-west-1.amazonaws.com/abibasnavbar/Coco+cute.jpg",
       location: "",
       first: "",
-      last: ""
+      last: "",
+      image: "",
+      defaultImage:
+        "https://s3-us-west-1.amazonaws.com/abibasnavbar/Screen+Shot+2019-03-24+at+8.59.25+PM.png"
     };
     this.splitArr = this.splitArr.bind(this);
     this.getCurrentChanges = this.getCurrentChanges.bind(this);
@@ -109,9 +111,7 @@ export default class EditPage extends React.Component {
     });
     const name = uri.split("/").pop();
     const imageRef = storageRef.child(`userImages/` + `${name}`);
-    const snapshot = await imageRef
-      .put(blob)
-      .then(() => console.log("blob sent!"));
+    await imageRef.put(blob).then(() => console.log("blob sent!"));
 
     blob.close();
 
@@ -120,9 +120,7 @@ export default class EditPage extends React.Component {
 
   handleImagePicked = async pickerResult => {
     let uploadUrl = await this.uploadImageAsync(pickerResult.uri);
-    this.setState({ image: uploadUrl }, () => {
-      console.log(this.state.image);
-    });
+    this.setState({ image: uploadUrl });
   };
 
   splitArr() {
@@ -139,7 +137,10 @@ export default class EditPage extends React.Component {
   }
 
   render() {
-    const { image } = this.state;
+    const image =
+      this.state.image === "" || !this.state.image
+        ? this.state.defaultImage
+        : this.state.image;
     return (
       <ScrollView>
         <View style={styles.parentimg}>
