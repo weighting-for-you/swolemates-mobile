@@ -6,7 +6,8 @@ import {
   TextInput,
   Button,
   Text,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from "react-native";
 import {
   addToDatabase,
@@ -14,6 +15,7 @@ import {
 } from "../profile-settings/changeDb.js";
 import { storage } from "../../firebase/firebase.js";
 import { ImagePicker, Permissions } from "expo";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const storageRef = storage.ref();
 
 export default class EditPage extends React.Component {
@@ -24,16 +26,13 @@ export default class EditPage extends React.Component {
       activities: "",
       gym: "",
       hours: "",
-<<<<<<< HEAD
-=======
       image: "https://s3-us-west-1.amazonaws.com/abibasnavbar/Coco+cute.jpg",
->>>>>>> refs/remotes/origin/upload-pics
       location: "",
       first: "",
       last: "",
       image: "",
       defaultImage:
-        "https://s3-us-west-1.amazonaws.com/abibasnavbar/Screen+Shot+2019-03-24+at+8.59.25+PM.png"
+        "https://s3-us-west-1.amazonaws.com/abibasnavbar/Screen+Shot+2019-03-24+at+8.59.25+PM.png",
     };
     this.splitArr = this.splitArr.bind(this);
     this.getCurrentChanges = this.getCurrentChanges.bind(this);
@@ -48,6 +47,7 @@ export default class EditPage extends React.Component {
 
   componentDidMount() {
     getFromDatabase("gabypernama", this.getCurrentChanges);
+
   }
 
   getCurrentChanges(snapshot) {
@@ -114,14 +114,8 @@ export default class EditPage extends React.Component {
       xhr.send(null);
     });
     const name = uri.split("/").pop();
-    const imageRef = storageRef.child(`userImages/` + `${name}`);
-<<<<<<< HEAD
+    const imageRef = storageRef.child(`userImages/` + `${ name }`);
     await imageRef.put(blob).then(() => console.log("blob sent!"));
-=======
-    const snapshot = await imageRef
-      .put(blob)
-      .then(() => console.log("blob sent!"));
->>>>>>> refs/remotes/origin/upload-pics
 
     blob.close();
 
@@ -130,13 +124,9 @@ export default class EditPage extends React.Component {
 
   handleImagePicked = async pickerResult => {
     let uploadUrl = await this.uploadImageAsync(pickerResult.uri);
-<<<<<<< HEAD
-    this.setState({ image: uploadUrl });
-=======
     this.setState({ image: uploadUrl }, () => {
       console.log(this.state.image);
     });
->>>>>>> refs/remotes/origin/upload-pics
   };
 
   splitArr() {
@@ -153,16 +143,15 @@ export default class EditPage extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
     const image =
       this.state.image === "" || !this.state.image
         ? this.state.defaultImage
         : this.state.image;
-=======
-    const { image } = this.state;
->>>>>>> refs/remotes/origin/upload-pics
     return (
-      <ScrollView>
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled={true}
+      >
         <View style={styles.parentimg}>
           <Image
             source={{
@@ -179,7 +168,7 @@ export default class EditPage extends React.Component {
         <View style={styles.container}>
           <TextInput
             style={styles.shortBox}
-            value={`${this.state.first}`}
+            value={`${ this.state.first }`}
             placeholder="   First"
             placeholderTextColor="#808080"
             onChangeText={first => {
@@ -188,7 +177,7 @@ export default class EditPage extends React.Component {
           />
           <TextInput
             style={styles.shortBox}
-            value={`${this.state.last}`}
+            value={`${ this.state.last }`}
             placeholder="   Last"
             placeholderTextColor="#808080"
             onChangeText={last => {
@@ -200,7 +189,7 @@ export default class EditPage extends React.Component {
         <View style={styles.container}>
           <TextInput
             style={styles.longBox}
-            value={`${this.state.activities}`}
+            value={`${ this.state.activities }`}
             placeholder="   Biking, Running, etc.."
             placeholderTextColor="#808080"
             onChangeText={activities =>
@@ -214,7 +203,7 @@ export default class EditPage extends React.Component {
         <View style={styles.container}>
           <TextInput
             style={styles.longBox}
-            value={`${this.state.gym}`}
+            value={`${ this.state.gym }`}
             placeholder="   24 HR Fitness, City Sports, etc.."
             placeholderTextColor="#808080"
             onChangeText={gym => {
@@ -226,7 +215,7 @@ export default class EditPage extends React.Component {
         <View style={styles.container}>
           <TextInput
             style={styles.longBox}
-            value={`${this.state.location}`}
+            value={`${ this.state.location }`}
             placeholder="   Los Angeles, San Francisco, etc.."
             placeholderTextColor="#808080"
             onChangeText={location => {
@@ -236,23 +225,25 @@ export default class EditPage extends React.Component {
             }}
           />
         </View>
-        <Text style={styles.text}>{"\n"}Hours Preferred: </Text>
-        <View style={styles.container}>
-          <TextInput
-            style={styles.longBox}
-            value={`${this.state.hours}`}
-            placeholder="   Morning"
-            placeholderTextColor="#808080"
-            onChangeText={hours => {
-              this.setState({ hours }, () => console.log(this.state.hours));
-            }}
-          />
+        <View keyboardShouldPersistTaps='handled' keyboardDismissMode='on-drag'>
+          <Text style={styles.text}>{"\n"}Hours Preferred: </Text>
+          <View style={styles.container}>
+            <TextInput
+              style={styles.longBox}
+              value={`${ this.state.hours }`}
+              placeholder="   Morning"
+              placeholderTextColor="#808080"
+              onChangeText={hours => {
+                this.setState({ hours }, () => console.log(this.state.hours));
+              }}
+            />
+          </View>
         </View>
         <Text style={styles.text}>{"\n"}About Me: </Text>
         <View style={styles.container}>
           <TextInput
             style={styles.aboutMe}
-            value={`${this.state.aboutMe}`}
+            value={`${ this.state.aboutMe }`}
             placeholder="ex. I love my deadlifts and squats, could use someone to help me get into cardio more"
             placeholderTextColor="#808080"
             numberOfLines={10}
@@ -268,7 +259,7 @@ export default class EditPage extends React.Component {
             this.splitArr();
           }}
         />
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -1,18 +1,5 @@
 const { db } = require("../../firebase/firebase.js");
-// const path = require("path");
-// const fs = require("fs");
-
-// fs.readFile(
-//   path.resolve(__dirname, "./buff-buddies-export.json"),
-//   (err, data) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     data = JSON.parse(data.toString());
-//     // console.log(data, data.userName);
-//     addToDatabase(data, "gabypernama");
-//   }
-// );
+const path = require("path");
 
 const addToDatabase = (usersObj, userName) => {
   return db
@@ -41,7 +28,7 @@ const getFromDatabase = (userName, callback) => {
   return db.ref(`user/${userName}`).on("value", callback);
 };
 
-// addToDatabase("gabypernama", );
+// addToDatabase("julianYuen", );
 
 module.exports = {
   addToDatabase,
