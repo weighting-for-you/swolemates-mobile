@@ -71,7 +71,7 @@ class DisplayProfile extends React.Component {
   };
 
   componentDidMount() {
-    getFromDatabase("gabypernama", this.getProfile);
+    getFromDatabase("aqilthanawala", this.getProfile);
   }
 
   render() {
