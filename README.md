@@ -1,41 +1,14 @@
-# buff-buddies
-
+# Swolemates: Gym Partner Mobile Matchmaking Application
 > Application to help find a buddy to workout with based on location
 
-## Table of Contents
+## Tech Stack
+> React-Native | Firebase | Expo
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+## Team Members
+> Justin Choi (@jmkchoi)
 
-## Usage
+> Xialin Leung (@xleung26)
 
-> npm install, npm start, npm run build
+> Mali Franzese (@Anomali007)
 
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install
-npm install axios
-npm install body-parser
-npm install express
-npm install nodemon
-npm install @babel/core
-npm install @babel/preset-env
-npm install babel-preset-react-native
-npm install babel-loader
-npm install react-native
-npm install webpack
-npm install webpack-cli
-```
+> Gabriella Pernama (@gabriellapernama)
